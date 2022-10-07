@@ -1,11 +1,23 @@
 #include <iostream>
 #include <iomanip>
 #include <string>
-#include <cstdio>
+#include <stdlib.h>
 #include <vector>
+#include <map>
+#include <chrono>
+#include <random>
+#include <iostream>
+#include <bits/stdc++.h>
+#include <fstream>
+#pragma once
 
-using std::vector;
+using std::string;
 using std::cout;
 using std::cin;
 using std::endl;
-using std::string;
+using std::setw;
+using std::left;
+using std::right;
+using std::vector;
+using std::map;
+using std::mt19937;

@@ -6,9 +6,11 @@
 #include <map>
 #include <chrono>
 #include <random>
-#include <iostream>
 #include <bits/stdc++.h>
 #include <fstream>
+#include <sstream>
+#include <stdio.h>
+#include <time.h>
 #pragma once
 
 using std::string;

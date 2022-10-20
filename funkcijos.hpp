@@ -6,6 +6,7 @@
 #pragma once
 
 int random();
+int generuoti(int dydis, int pazk);
 duom ivedimas(int &n);
 double galutinis(duom temp, std::string a);
 void isvedimas(duom temp);

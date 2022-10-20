@@ -3,10 +3,13 @@
 
 
 int random(){
-  srand(time(0));
- 
-  for(int i=0;i<10;i++)
-      return ((rand() % 10) + 1); 
+  using hrClock = std::chrono::high_resolution_clock;
+  std::mt19937 mt(static_cast<long unsigned int>(hrClock::now().time_since_epoch().count()));
+  std::uniform_int_distribution<int> dist(1, 10);
+  for (int i = 0; i < 5; ++i) {
+  return (dist(mt));
+  }
+  
 }
 
 duom ivedimas(int &n){
@@ -149,8 +152,30 @@ double galutinis(duom temp, string a){
   }
 }
 
-
+int generuoti(int dydis, int pazk){
+  std::ofstream fr;
+  fr.open("in" + std::to_string(dydis) + ".txt");
+  std::stringstream a;
+  a << std::left << std::setw (15) << "Vardas" << std::setw (19) << "Pavarde";
+  for (int k = 0; k < pazk; k++){
+    a << std::setw(21) << "ND" + std::to_string(k+1);
+  }
+  a << "EGZ" << endl;
+  for (int i = 1; i <= dydis; i++){
+    a << std::left << setw (15) << "Vardas" + std::to_string(i) << std::setw(20) << "Pavarde" + std::to_string(i);
+    for (int j=0; j<pazk; j++){
+      a << std::setw(21) << random();
+    }
+    if (i == dydis)a << random();
+    else a << random() << endl;
+  }
+  fr << a.str();
+  fr.close();
+}
 
 void isvedimas(duom temp){
-  cout << std::left << setw (15) << temp.var << std::setw(20) << temp.pav << std::setw(21) << std::setprecision(3) << temp.galutinis[0] << std::setw(5) << temp.galutinis[1] << endl;
+  std::stringstream a;
+  a << std::left << setw (15) << temp.var << std::setw(20) << temp.pav << std::setw(21) << std::setprecision(3) << temp.galutinis[0] << std::setw(5) << temp.galutinis[1] << endl;
+  cout << a.str();
+  a.clear();
 }

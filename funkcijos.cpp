@@ -124,12 +124,10 @@ duom ivedimas(int &n){
 double galutinis(duom temp, string a){
   if (a == "Vid"){
     int suma = 0;
-    double g;
     for (int i=0; i<temp.paz.size(); i++){
       suma = suma + temp.paz[i];
     }
-    g = ((double)((double)suma/temp.paz.size()) * 0.4) + ((double)temp.egz * 0.6);
-    return g;
+    return (((double)((double)suma/temp.paz.size()) * 0.4) + ((double)temp.egz * 0.6));
   }
 
   else if (a == "Med"){
@@ -143,11 +141,10 @@ double galutinis(duom temp, string a){
     sort(t.begin(), t.end());
 
     if ((t.size())%2 == 0){
-      double g = ((double)(t[((t.size()+1)/2)-1]+t[((t.size()+1)/2)])/2);
-      return g;
+      return ((double)(((double)(t[((t.size()+1)/2)-1]+t[((t.size()+1)/2)])/2)*0.4) + ((double)temp.egz * 0.6));
     }
     else{
-      return (t[((t.size()+2)/2)-1]);
+      return ((double)((t[((t.size()+2)/2)-1])*0.4) + ((double)temp.egz * 0.6));
     }
   }
 }
@@ -178,4 +175,41 @@ void isvedimas(duom temp){
   a << std::left << setw (15) << temp.var << std::setw(20) << temp.pav << std::setw(21) << std::setprecision(3) << temp.galutinis[0] << std::setw(5) << temp.galutinis[1] << endl;
   cout << a.str();
   a.clear();
+}
+
+bool gavoSkola(const duom& s, string d) {
+  if (d == "V") return s.galutinis[0] < 5;
+  else return s.galutinis[1] < 5.0;
+}
+
+vector<duom> skirstykStudentus(vector<duom>& studentai, string d) {
+    vector<duom> kieti, minksti;
+    for (vector<duom>::size_type i = 0; i != studentai.size(); ++i){
+      if (gavoSkola(studentai[i], d)) 
+        minksti.push_back(studentai[i]);
+      else
+        kieti.push_back(studentai[i]);
+    }
+    studentai = kieti; 
+    return minksti; 
+}
+
+bool compare(duom a, duom b){
+  if (a.galutinis[0] != b.galutinis[0])
+	    return a.galutinis[0] > b.galutinis[0];	
+  else
+    return a.galutinis[1] > b.galutinis[1];
+}
+
+std::list<duom> skirstykStudentus(std::list<duom>& studentai, string d) {
+    std::list<duom> kieti, minksti;
+    std::list<duom>::iterator itr = studentai.begin();
+    for (itr; itr != studentai.end(); itr++){
+      if (gavoSkola(*itr, d)) 
+        minksti.push_back(*itr);
+      else
+        kieti.push_back(*itr);
+    }
+    studentai = kieti; 
+    return minksti; 
 }

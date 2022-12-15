@@ -1,7 +1,7 @@
 #include "mylib.hpp"
 #include "Studentas.hpp"
 #include "funkcijos.hpp"
-#define pirma
+#define pirma  
 #define vectoriai
 
 int main(){
@@ -150,6 +150,8 @@ int main(){
   #endif
 
   #ifdef trecia
+  Studentas a("Aivaras", "Varkalis", {10, 10}, 10, 2, 10);
+  cout << a << endl;
   #endif
   #endif
 }

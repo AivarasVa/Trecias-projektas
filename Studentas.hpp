@@ -8,7 +8,37 @@
 
 using namespace std;
 
-class Studentas{
+class Zmogus{
+    protected:
+        string vardas;
+        string pavarde;
+    public:
+        Zmogus(){};
+
+        Zmogus(string var, string pav){
+            vardas = var;
+            pavarde = pav;
+        }
+
+        ~Zmogus(){};
+
+        virtual void abstrakti() = 0;
+
+        string getVar() const{
+            return vardas;
+        };
+
+        string getPav() const{
+            return pavarde;
+        };
+};
+
+class Studentas: public Zmogus{
+    private:
+        vector<int> pazymiai;
+        int egz;
+        int kiekis;
+        double galutinis;
     public:
         Studentas(){
             int egz = 0;
@@ -25,7 +55,7 @@ class Studentas{
             galutinis = g;
         };
 
-        ~Studentas(){};
+        ~Studentas(){pazymiai.clear();};
 
         Studentas(const Studentas& other){
             vardas = other.vardas;
@@ -45,14 +75,11 @@ class Studentas{
             egz = other.egz;
             kiekis = other.kiekis;
             galutinis = other.galutinis;
+            return *this;
         }
 
         friend std::ostream& operator<<(std::ostream& out, Studentas &a){
-            out << a.vardas << " " << a.pavarde << "\n";
-            for (int i = 0; i < a.kiekis; i++){
-                out << a.pazymiai[i] << " ";
-            }
-            out << "\n" << a.egz << " " << a.galutinis;
+            out << a.vardas << " " << a.pavarde << " " << a.galutinis;
         }
 
         friend std::istream& operator>>(std::istream& in, Studentas &a){
@@ -65,13 +92,7 @@ class Studentas{
             in >> a.egz;
         }
 
-        string getVar() const{
-            return vardas;
-        };
-
-        string getPav() const{
-            return pavarde;
-        };
+        virtual void abstrakti(){};
 
         vector<int> getPaz() const{
             return pazymiai;
@@ -88,14 +109,6 @@ class Studentas{
         double getGal() const{
             return galutinis;
         };
-
-    private:
-        string vardas;
-        string pavarde;
-        vector<int> pazymiai;
-        int egz;
-        int kiekis;
-        double galutinis;
 };
 
 #endif
